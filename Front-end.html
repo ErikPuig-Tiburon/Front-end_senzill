@@ -9,18 +9,40 @@
 <body>
 
 	<h2>GET Tots els estudiants</h2>
-	<button>Buscar a TOTs els estudians</button>
+	<button onclick="buscarTOTSestudians()">Buscar a TOTs els estudians</button>
+	<pre id="buscarTOTSestudians"></pre>
 
 	<hr>
 
 	<h2>GET Un estudiant</h2>
-	<input type="text" id="studentId" placeholder="Fica un ID asi to largo plis">
-	<button">Buscar estudiant individual per ID</button>
+	<input type="text" id="UNestudiant" placeholder="Fica un ID asi to largo plis">
+	<button onclick="UNestudiant()">Buscar estudiant individual per ID</button>
+	<pre id="UNestudiant"></pre>
 
-		<script>
-			const lestras_i_numeritos_pa_coger_cosas = "http://localhost:8000/students";
+	<script>
+		const lestras_i_numeritos_pa_coger_cosas = "http://localhost:8000/students";
+		// GET tots
+		async function buscarTOTSestudians() {
+			const res = await fetch(lestras_i_numeritos_pa_coger_cosas + "/");
+			const data = await res.json();
+			document.getElementById("buscarTOTSestudians").textContent = JSON.stringify(data, null, 2);
+		}
 
-		</script>
+		// GET un
+		async function UNestudiant() {
+			const id = document.getElementById("UNestudiant").value;
+			const res = await fetch(lestras_i_numeritos_pa_coger_cosas + "/" + id);
+
+			if (!res.ok) {
+				document.getElementById("resultado").textContent = "Error: " + res.status;
+				return;
+			}
+
+			const data = await res.json();
+			document.getElementById("resultado").textContent = JSON.stringify(data, null, 2);
+		}
+
+	</script>
 
 </body>
 
