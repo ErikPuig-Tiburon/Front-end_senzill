@@ -17,7 +17,7 @@
 	<h2>GET Un estudiant</h2>
 	<input type="text" id="UNestudiant" placeholder="Fica un ID asi to largo plis">
 	<button onclick="UNestudiant()">Buscar estudiant individual per ID</button>
-	<pre id="UNestudiant"></pre>
+	<pre id="resultat"></pre>
 
 	<script>
 		const lestras_i_numeritos_pa_coger_cosas = "http://localhost:8000/students";
@@ -34,12 +34,12 @@
 			const res = await fetch(lestras_i_numeritos_pa_coger_cosas + "/" + id);
 
 			if (!res.ok) {
-				document.getElementById("resultado").textContent = "Error: " + res.status;
+				document.getElementById("resultat").textContent = "Error: " + res.status;
 				return;
 			}
 
 			const data = await res.json();
-			document.getElementById("resultado").textContent = JSON.stringify(data, null, 2);
+			document.getElementById("resultat").textContent = JSON.stringify(data, null, 2);
 		}
 
 	</script>
